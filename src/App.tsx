@@ -11,9 +11,9 @@ function App() {
     "https://quoter-airburst.vercel.app"
   );
   // Generate QR map of booleans
-  const qrData = qr(text || "") as GridType;
+  const data = qr(text || "") as GridType;
   // Convert to SVG
-  const svg = generateSvg(qrData);
+  const svg = generateSvg({ data, spots: true });
 
   return (
     <>
