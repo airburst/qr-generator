@@ -10,7 +10,7 @@ export const Row = ({ data }: RowProps) => {
   return (
     <div className={styles.row}>
       {data.map((on, i) => (
-        <Cell key={`cell-${i}`} on={on} />
+        <Cell key={`cell-${i}`} on={on} radius={0} />
       ))}
     </div>
   );

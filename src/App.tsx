@@ -6,34 +6,27 @@ import { generateSvg } from "./utils/generateSvg";
 import { GridType } from "./types";
 import "./App.css";
 
-const letterP = [
-  [false, false, false, false, false],
-  [false, true, true, true, false],
-  [false, true, false, true, false],
-  [false, true, true, true, false],
-  [false, true, false, false, false],
-  [false, true, false, false, false],
-  [false, false, false, false, false],
-];
-
-console.log(generateSvg(letterP));
-
 function App() {
-  const [text, setText] = useState<string | null>(null);
+  // const [text, setText] = useState<string | null>(null);
+  const [text, setText] = useState<string | null>(
+    "https://quoter-airburst.vercel.app"
+  );
 
   const qrData = qr(text || "") as GridType;
 
   // Write SVG
   const svg = generateSvg(qrData);
-  console.log("🚀 ~ file: App.tsx:28 ~ App ~ svg:", svg);
+  console.log("🚀", svg);
 
   return (
     <>
       <h1>QR Code Generator</h1>
 
       <Input
+        aria-label="Enter url or text"
         id="qr-value"
         className="qr-value"
+        value={text}
         onChange={(e) => setText(e.currentTarget.value)}
       />
 
