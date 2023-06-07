@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Input from "@mui/base/Input";
 import { qr } from "headless-qr";
-import { Row } from "./components/Row";
 import { generateSvg } from "./utils/generateSvg";
 import { GridType } from "./types";
 import "./App.css";
@@ -11,12 +10,10 @@ function App() {
   const [text, setText] = useState<string | null>(
     "https://quoter-airburst.vercel.app"
   );
-
+  // Generate QR map of booleans
   const qrData = qr(text || "") as GridType;
-
-  // Write SVG
+  // Convert to SVG
   const svg = generateSvg(qrData);
-  console.log("🚀", svg);
 
   return (
     <>
@@ -30,13 +27,7 @@ function App() {
         onChange={(e) => setText(e.currentTarget.value)}
       />
 
-      {text && (
-        <div>
-          {qrData.map((row, i) => (
-            <Row key={`row-${i}`} data={row} />
-          ))}
-        </div>
-      )}
+      {text && <div dangerouslySetInnerHTML={{ __html: svg }} />}
     </>
   );
 }
