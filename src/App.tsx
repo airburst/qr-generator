@@ -12,10 +12,7 @@ import { GridType } from "./types";
 import "./App.css";
 
 function App() {
-  // const [text, setText] = useState<string | null>(null);
-  const [text, setText] = useState<string | undefined>(
-    "https://quoter-airburst.vercel.app"
-  );
+  const [text, setText] = useState<string | null>(null);
   const [spots, setSpots] = useState<boolean>(false);
 
   const toggleSpots = () => setSpots(!spots);
@@ -55,7 +52,7 @@ function App() {
             id="qr_code_text"
             name="qr_code_text"
             type="text"
-            value={text}
+            value={text || ""}
             onChange={(e) => setText(e.currentTarget.value)}
           />
         </Flex>
