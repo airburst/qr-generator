@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Text } from "@twilio-paste/text";
 import { Flex } from "@twilio-paste/flex";
+import { Stack } from "@twilio-paste/stack";
 import { Box } from "@twilio-paste/box";
 import { Button } from "@twilio-paste/button";
 import { Label } from "@twilio-paste/label";
@@ -16,6 +17,8 @@ function App() {
   const [spots, setSpots] = useState<boolean>(false);
 
   const toggleSpots = () => setSpots(!spots);
+
+  const clearText = () => setText(null);
 
   const downloadSvgFile = () => {
     const file = new Blob([svg], { type: "text/plain" });
@@ -65,13 +68,21 @@ function App() {
         </Flex>
       </Flex>
 
-      <Box marginBottom="space80">
-        {text && <div dangerouslySetInnerHTML={{ __html: svg }} />}
-      </Box>
-
-      <Button id="download" variant="primary" onClick={downloadSvgFile}>
-        Download
-      </Button>
+      {text && (
+        <>
+          <Box marginBottom="space80">
+            <div dangerouslySetInnerHTML={{ __html: svg }} />
+          </Box>
+          <Stack orientation="horizontal" spacing="space40">
+            <Button id="download" variant="primary" onClick={downloadSvgFile}>
+              Download
+            </Button>
+            <Button id="clear" variant="secondary" onClick={clearText}>
+              Clear
+            </Button>
+          </Stack>
+        </>
+      )}
     </>
   );
 }
